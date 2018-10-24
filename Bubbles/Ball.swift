@@ -16,6 +16,18 @@ enum LeftRight {
     case Right, Left
 }
 
+enum BallColor: Int {
+    case Red, Green, Blue, Yellow
+    func introduce() -> CGColor {
+        switch self {
+        case .Blue : return UIColor.blue.cgColor
+        case .Green: return UIColor.green.cgColor
+        case .Red: return UIColor.red.cgColor
+        case .Yellow : return UIColor.yellow.cgColor
+        }
+    }
+}
+
 class Ball: CAShapeLayer  {
     
     let radius: Double = 30
@@ -32,12 +44,12 @@ class Ball: CAShapeLayer  {
         self.dY = self.direct() == 1 ? UpDown.Down : UpDown.Up
         self.startY = CGFloat(startY)
         self.startX = CGFloat(startX)
-        self.indexX = CGFloat(arc4random_uniform(UInt32(5)) + 1)
+        self.indexX = CGFloat(arc4random_uniform(5) + 1)
         let rect = CGRect(origin: CGPoint(x: startX, y: startY), size: self.size)
         let circle = UIBezierPath.init(roundedRect: rect, cornerRadius: CGFloat(radius))
         self.path = circle.cgPath
-        self.fillColor = UIColor.cyan.cgColor
-        self.strokeColor = UIColor.red.cgColor
+        self.fillColor = (BallColor.init(rawValue: Int(arc4random_uniform(4)))?.introduce())!//UIColor.cyan.cgColor
+        self.strokeColor = (BallColor.init(rawValue: Int(arc4random_uniform(4)))?.introduce())!
         self.lineWidth = 0.5
     }
     
@@ -49,6 +61,6 @@ class Ball: CAShapeLayer  {
     }
     
     private func direct() -> Int {
-        return Int(arc4random_uniform(UInt32(2)))
+        return Int(arc4random_uniform(2))
     }
 }

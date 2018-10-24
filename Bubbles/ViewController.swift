@@ -49,15 +49,15 @@ class ViewController: UIViewController {
         }
         for i in arrayOfBalls {
             i.move()
-            if i.startX <= -30 {
+            if i.startX <= -15 {
                 i.dX = .Right
-            } else if i.startX >= width + 30 {
+            } else if i.startX >= width + 15 {
                 i.dX = .Left
             }
             
-            if i.startY >= height + 30 {
+            if i.startY >= height {
                 i.dY = .Up
-            } else if i.startY <= -30 {
+            } else if i.startY <= 0 {
                 i.dY = .Down
             }
         }
