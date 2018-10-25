@@ -35,6 +35,7 @@ class Ball: CAShapeLayer  {
     var dY: UpDown = .Down
     var startX: CGFloat = 0.0
     var startY: CGFloat = 0.0
+    var ballColor = UIColor.cyan.cgColor
     private var indexX: CGFloat = 1.0
     private var indexY: CGFloat { return self.indexX + 2.7181 }
     private var size: CGSize { return CGSize(width: self.radius/2, height: self.radius/2)}
@@ -48,7 +49,7 @@ class Ball: CAShapeLayer  {
         let rect = CGRect(origin: CGPoint(x: startX, y: startY), size: self.size)
         let circle = UIBezierPath.init(roundedRect: rect, cornerRadius: CGFloat(radius))
         self.path = circle.cgPath
-        self.fillColor = (BallColor.init(rawValue: Int(arc4random_uniform(4)))?.introduce())!//UIColor.cyan.cgColor
+        self.fillColor = ballColor
         self.strokeColor = (BallColor.init(rawValue: Int(arc4random_uniform(4)))?.introduce())!
         self.lineWidth = 0.5
     }
@@ -58,6 +59,7 @@ class Ball: CAShapeLayer  {
         self.startY += ( self.dY == .Up ? -self.indexY : +self.indexY)
         self.position.x += ( self.dX == .Left ? -self.indexX : +self.indexX)
         self.position.y += ( self.dY == .Up ? -self.indexY : +self.indexY)
+        self.fillColor = ballColor
     }
     
     private func direct() -> Int {

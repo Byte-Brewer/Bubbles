@@ -49,16 +49,20 @@ class ViewController: UIViewController {
         }
         for i in arrayOfBalls {
             i.move()
-            if i.startX <= -15 {
+            if i.startX <= 0 {
                 i.dX = .Right
-            } else if i.startX >= width + 15 {
+                i.ballColor = BallColor.Blue.introduce()
+            } else if i.startX >= width {
                 i.dX = .Left
+                i.ballColor = BallColor.Green.introduce()
             }
             
             if i.startY >= height {
                 i.dY = .Up
+                i.ballColor = BallColor.Red.introduce()
             } else if i.startY <= 0 {
                 i.dY = .Down
+                i.ballColor = BallColor.Yellow.introduce()
             }
         }
     }
